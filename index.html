@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="pulpTTT">
+	<head>
+		<link rel="stylesheet" href="normalize.css">
+		<link rel="stylesheet" href="style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular.js"></script>
+		<script src="main.js"></script>
+		<title>Pulp Fiction TTD</title>
+	</head>
+
+	<body ng-controller="gameCtrl">		
+		<main>
+<div id="start">
+		<header>
+			<h1>Chapter 4: Pulp Fiction Tic Tac Die!</h1>
+		</header>
+
+		<div class="screen">
+
+			<h2 class="game-character">Pick your player</h2>
+
+			<div class="menu">
+				<a href="#test"><button ng-click="playerAsign(1)" value="Vincent">Vincent Vega</button></a>
+				<a href="#test"><button ng-click="playerAsign(2)">Butch Coolidge</button></a>
+			</br>
+			</div>
+		</div>
+</div>
+<div id="test">
+		<header class="game-board-title">
+				<h2>Chapter 8: Shoot out!</h2>
+		</header>
+
+		<div class="game-board">
+
+			<section>
+				<ul id="row-one">
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</section>
+			<section>
+				<ul id="row-two">
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</section>
+			<section>
+				<ul id="row-three">
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</section>
+		</div>
+		<a href="#result"><button>DONE</button></a>
+</div>
+<div id="result">
+		<header class="end-title">
+			<h2>Chapter 6: The Result</h2>
+		</header>
+		
+		<div class="end-screen">
+			<p>image</p></br>
+			<h2>Do you want to play again?</h2>
+			<a href="#start"><button>Yea MOTHER F@$%!</button></a>
+			<a href="#exit"><button>I'm out!</button></a>
+		</div>
+</div>
+<div id="exit">		
+		<div class="exit-screen">
+			<h2>YOU WUSS!!!!</h2>
+		</div>
+</div>	
+		</main>
+	</body>
+</html>
