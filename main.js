@@ -1,4 +1,4 @@
-var pulpTTT = angular.module('pulpTTT', []);
+ var pulpTTT = angular.module('pulpTTT', []);
 
 pulpTTT.controller('gameCtrl', ['$scope', function($scope){
 
@@ -42,6 +42,7 @@ $scope.gamePlay = function(value) {
 		console.log($scope.cells);
 	};
 	$scope.trigger($scope.cells);
+	$scope.winner($scope.cells);
 };
 
 $scope.tab = 0
@@ -54,12 +55,13 @@ $scope.trigger = function(array) {
 			$scope.tabCounter+=1;
 			$scope.tab+=1;
 			if ($scope.tabCounter == 9) {
-				$scope.winner(array);
+				alert("It's a tie!");
+				return true
 			} else {
 				return false;
 			}
 		} else {
-			$scope.tab+=1;
+			return false;
 		};
 	};
 };
@@ -72,16 +74,32 @@ $scope.winner = function(array2) {
 	     array2[3] == 'X' && array2[4] == 'X' && array2[5] == 'X' ||
 	     array2[6] == 'X' && array2[7] == 'X' && array2[8] == 'X' ||
 	     array2[0] == 'X' && array2[4] == 'X' && array2[8] == 'X' ||
+	     array2[2] == 'X' && array2[4] == 'X' && array2[6] == 'X' ||
 	     array2[0] == 'X' && array2[3] == 'X' && array2[6] == 'X' ||
 	     array2[1] == 'X' && array2[4] == 'X' && array2[7] == 'X' ||
 	     array2[2] == 'X' && array2[5] == 'X' && array2[8] == 'X'
 	 	
 		 ){
 		alert("Vincent wins!");
-	} else {
+		return true;
+	} else if (
+
+		 array2[0] == 'O' && array2[1] == 'O' && array2[2] == 'O' ||
+	     array2[3] == 'O' && array2[4] == 'O' && array2[5] == 'O' ||
+	     array2[6] == 'O' && array2[7] == 'O' && array2[8] == 'O' ||
+	     array2[0] == 'O' && array2[4] == 'O' && array2[8] == 'O' ||
+	     array2[2] == 'O' && array2[4] == 'O' && array2[6] == 'O' ||
+	     array2[0] == 'O' && array2[3] == 'O' && array2[6] == 'O' ||
+	     array2[1] == 'O' && array2[4] == 'O' && array2[7] == 'O' ||
+	     array2[2] == 'O' && array2[5] == 'O' && array2[8] == 'O'
+
+		) {
 		alert("Butch wins!");
+		return true;
+	} else {
+		return false;	
 	};
-};	
+};
 
 
 }]);
