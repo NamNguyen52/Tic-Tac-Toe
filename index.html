@@ -20,56 +20,52 @@
 			<h2 class="game-character">Pick your player</h2>
 
 			<div class="menu">
-				<a href="#test"><button ng-click="playerAsign(1)" value="Vincent">Vincent Vega</button></a>
-				<a href="#test"><button ng-click="playerAsign(2)">Butch Coolidge</button></a>
-			</br>
+				<a href="#test"><input type="button" ng-click="playerAsign(1)" value="Vincent Vega"></a>
+				<a href="#test"><input type="button" ng-click="playerAsign(2)" value="Butch Coolidge"></a>
+			</div>
+
 			</div>
 		</div>
 </div>
 <div id="test">
 		<header class="game-board-title">
-				<h2>Chapter 8: Shoot out!</h2>
+				<h2>Chapter 8: Royale With Cheese</h2>
 		</header>
 
-		<div class="game-board">
+		<div class="players">
+			<h3>Player1: {{ player1 }}</h3>
+			<h3>Player2: {{ player2 }}</h3>
+		</div>
 
-			<section>
-				<ul id="row-one">
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
-			</section>
-			<section>
-				<ul id="row-two">
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
-			</section>
-			<section>
-				<ul id="row-three">
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
-			</section>
+		<div class="game-board">
+		
+		<section>
+			<ul>
+				<li ng-repeat="cell in cells track by $index" ng-class="{clear: $index % 3 == 0, format: true, vincent: cells[$index] == 'X', butch: cells[$index] == 'O'}" ng-click="gamePlay($index)">
+					{{ cell }}
+				</li>
+			</ul>
+		</section>
+
 		</div>
 		<a href="#result"><button>DONE</button></a>
 </div>
 <div id="result">
 		<header class="end-title">
-			<h2>Chapter 6: The Result</h2>
+			<h2>Chapter 6: Adrenalin</h2>
 		</header>
 		
 		<div class="end-screen">
 			<p>image</p></br>
 			<h2>Do you want to play again?</h2>
-			<a href="#start"><button>Yea MOTHER F@$%!</button></a>
-			<a href="#exit"><button>I'm out!</button></a>
+			<a href="#start"><button>Yea!</button></a>
+			<a href="#end"><button>I'm out!</button></a>
 		</div>
 </div>
-<div id="exit">		
+<div id="end" class="exit">	
+
+		<h2>Chapter 1: Zed's dead baby, Zed's dead</h2>
+
 		<div class="exit-screen">
 			<h2>YOU WUSS!!!!</h2>
 		</div>
