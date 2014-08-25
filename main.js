@@ -80,7 +80,7 @@ $scope.winner = function(array2) {
 	     array2[2] == 'X' && array2[5] == 'X' && array2[8] == 'X'
 	 	
 		 ){
-		alert("Vincent wins!");
+		$scope.winner="Vincent wins!";
 		return true;
 	} else if (
 
@@ -94,7 +94,7 @@ $scope.winner = function(array2) {
 	     array2[2] == 'O' && array2[5] == 'O' && array2[8] == 'O'
 
 		) {
-		alert("Butch wins!");
+		$scope.winner="Butch wins!";
 		return true;
 	} else {
 		return false;	

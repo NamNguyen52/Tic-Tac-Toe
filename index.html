@@ -11,7 +11,7 @@
 	<body ng-controller="gameCtrl">		
 		<main>
 
-			<div class="cover-photo">
+			<div class="cover-photo" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
 				<div class="cover-title-container">
 				<header class="cover-title">
 					<h1>Pulp Fiction Tic Tac Die!</h1>
@@ -46,7 +46,12 @@
 					{{ cell }}
 				</li>
 			</ul>
+			<p></p>
 		</section>
+		</div>
+		<div class="result-board">
+			<h2>The winner is!</h2>
+			<p>{{ winner }}</p>
 		</div>
 		<div class="bottom-space">
 		</div>
