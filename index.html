@@ -10,12 +10,18 @@
 
 	<body ng-controller="gameCtrl">		
 		<main>
-<div id="start">
-		<header>
-			<h1>Chapter 4: Pulp Fiction Tic Tac Die!</h1>
-		</header>
 
-		<div class="screen">
+			<div class="cover-photo">
+				<div class="cover-title-container">
+				<header class="cover-title">
+					<h1>Pulp Fiction Tic Tac Die!</h1>
+					<a href="#test"><button>PLAY!</button></a>
+				</header>
+				</div>
+			</div>	
+<!--<div id="start">-->
+
+		<!--<div class="screen">
 
 			<h2 class="game-character">Pick your player</h2>
 
@@ -26,50 +32,25 @@
 
 			</div>
 		</div>
-</div>
-<div id="test">
+</div>-->
+		<div id="test">
 		<header class="game-board-title">
-				<h2>Chapter 8: Royale With Cheese</h2>
+			<h2>Royale With Cheese</h2>
 		</header>
-
-		<div class="players">
-			<h3>Player1: {{ player1 }}</h3>
-			<h3>Player2: {{ player2 }}</h3>
-		</div>
 
 		<div class="game-board">
 		
 		<section>
 			<ul>
-				<li ng-repeat="cell in cells track by $index" ng-class="{clear: $index % 3 == 0, format: true, vincent: cells[$index] == 'X', butch: cells[$index] == 'O'}" ng-click="gamePlay($index)">
+				<li ng-repeat="cell in cells track by $index" ng-class="{clear: $index % 3 == 0, format: true, vincent: cells[$index] == 'X', butch: cells[$index] == 'O', cover: cells[$index] != ('X' || 'O')}" ng-click="gamePlay($index)">
 					{{ cell }}
 				</li>
 			</ul>
 		</section>
-
 		</div>
-		<a href="#result"><button>DONE</button></a>
-</div>
-<div id="result">
-		<header class="end-title">
-			<h2>Chapter 6: Adrenalin</h2>
-		</header>
-		
-		<div class="end-screen">
-			<p>image</p></br>
-			<h2>Do you want to play again?</h2>
-			<a href="#start"><button>Yea!</button></a>
-			<a href="#end"><button>I'm out!</button></a>
+		<div class="bottom-space">
 		</div>
-</div>
-<div id="end" class="exit">	
-
-		<h2>Chapter 1: Zed's dead baby, Zed's dead</h2>
-
-		<div class="exit-screen">
-			<h2>YOU WUSS!!!!</h2>
 		</div>
-</div>	
 		</main>
 	</body>
 </html>
