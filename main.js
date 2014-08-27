@@ -1,6 +1,6 @@
- var pulpTTT = angular.module('pulpTTT', []);
+ var pulpTTT = angular.module('pulpTTT', ['firebase']);
 
-pulpTTT.controller('gameCtrl', ['$scope', function($scope){
+pulpTTT.controller('gameCtrl', ['$scope','$firebase', function($scope, $firebase, $ngAudio){
 
 
 $scope.playerAsign = function(buttonNum) {
@@ -22,27 +22,35 @@ $scope.playerAsign = function(buttonNum) {
 
 $scope.playerOrder = [];
 
-$scope.cells = ['','','','','','','','',''];
+$scope.box = {cells: ['','','','','','','','','']};
+
+var ref = $firebase( new Firebase("https://pulpttt.firebaseio.com/data") );
+ref.$bind($scope,'box');
+
+$scope.$watch('box', function(){
+	console.log('Hello!');
+});
 
 $scope.counter = 0
 
 $scope.gamePlay = function(value) {
 
 	$scope.counter = $scope.counter + 1;
-	console.log($scope.counter); 
+	console.log($scope.counter);
+if ($scope.box.cells[value] == 0)	 
 	if ($scope.counter % 2 == 0) {
 		console.log("1");
 		console.log(value);
-		$scope.cells[value] = "X"
-		console.log($scope.cells);
+		$scope.box.cells[value] = "X"
+		console.log($scope.box.cells);
 	} else {
 		console.log("2");
 		console.log(value);
-		$scope.cells[value] = "O"
-		console.log($scope.cells);
+		$scope.box.cells[value] = "O"
+		console.log($scope.box.cells);
 	};
-	$scope.trigger($scope.cells);
-	$scope.winner($scope.cells);
+	$scope.trigger($scope.box.cells);
+	$scope.winner($scope.box.cells);
 };
 
 $scope.tab = 0
@@ -55,7 +63,7 @@ $scope.trigger = function(array) {
 			$scope.tabCounter+=1;
 			$scope.tab+=1;
 			if ($scope.tabCounter == 9) {
-				alert("It's a tie!");
+				$scope.tie="It's a tie!";
 				return true
 			} else {
 				return false;
@@ -80,7 +88,8 @@ $scope.winner = function(array2) {
 	     array2[2] == 'X' && array2[5] == 'X' && array2[8] == 'X'
 	 	
 		 ){
-		$scope.winner="Vincent wins!";
+		$scope.winner="Vincent!";
+		$scope.tabCounter = 0;
 		return true;
 	} else if (
 
@@ -94,7 +103,8 @@ $scope.winner = function(array2) {
 	     array2[2] == 'O' && array2[5] == 'O' && array2[8] == 'O'
 
 		) {
-		$scope.winner="Butch wins!";
+		$scope.winner="Butch!";
+		$scope.tabCounter = 0;
 		return true;
 	} else {
 		return false;	

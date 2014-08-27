@@ -4,14 +4,16 @@
 		<link rel="stylesheet" href="normalize.css">
 		<link rel="stylesheet" href="style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular.js"></script>
+		<script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
+		<script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+		<script src="ngFx.js"></script>
 		<script src="main.js"></script>
 		<title>Pulp Fiction TTD</title>
 	</head>
 
 	<body ng-controller="gameCtrl">		
 		<main>
-
-			<div class="cover-photo" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+			<div class="cover-photo">
 				<div class="cover-title-container">
 				<header class="cover-title">
 					<h1>Pulp Fiction Tic Tac Die!</h1>
@@ -42,16 +44,16 @@
 		
 		<section>
 			<ul>
-				<li ng-repeat="cell in cells track by $index" ng-class="{clear: $index % 3 == 0, format: true, vincent: cells[$index] == 'X', butch: cells[$index] == 'O', cover: cells[$index] != ('X' || 'O')}" ng-click="gamePlay($index)">
+				<li class='fx-fade-down' ng-repeat="cell in box.cells track by $index" ng-class="{clear: $index % 3 == 0, format: true, vincent: box.cells[$index] == 'X', butch: box.cells[$index] == 'O', cover: box.cells[$index] != ('X' || 'O')}" ng-click="gamePlay($index)">
 					{{ cell }}
 				</li>
 			</ul>
-			<p></p>
 		</section>
 		</div>
 		<div class="result-board">
 			<h2>The winner is!</h2>
 			<p>{{ winner }}</p>
+			<p>{{ tie }}</p>
 		</div>
 		<div class="bottom-space">
 		</div>

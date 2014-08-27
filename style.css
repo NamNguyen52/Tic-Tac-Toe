@@ -1,3 +1,8 @@
+@font-face {
+	font-family: "Typoster";
+	src: url('../GATicTacToe/Typoster_demo.otf');
+}
+
 body {
 	background-color: #FF0051;
 }
@@ -13,12 +18,13 @@ body {
 .cover-title {
 	float: left;
 	z-index: 5;
-	font-size: 40px;
-	text-shadow: 3px 3px black;
+	font-size: 50px;
+	text-shadow: 4px 8px black;
+	font-family: Typoster;
 }
 
 .cover-title-container {
-	width: 500px;
+	width: 600px;
 	height: 800px;
 	margin-left: 50px;
 }
@@ -37,7 +43,7 @@ button {
 	background-color: #FF2321;
 	color: #FFFDF8;
 	border: 5px solid black;
-	text-shadow: 2px 2px #F7FF3F;
+	text-shadow: 2px 2px black;
 }
 
 .game-character {
@@ -76,11 +82,11 @@ header {
 
 .game-board-title {
 	margin-top: 150px;
-	font-family: sans-serif;
+	font-family: Typoster;
 	font-size: 40px;
 	padding-bottom: 10px;
 	margin-left: 50px;
-	text-shadow: 3px 3px black;
+	text-shadow: 4px 4px black;
 }
 
 .format {
@@ -97,9 +103,8 @@ header {
 	position: relative;
 	left: 50px;
 	height: 300px;
-	width: 300px;
+	width: 280px;
 	font-size: 20px;
-	border: 1px solid black;
 	top: 100px;
 }
 
@@ -107,15 +112,16 @@ header {
 	text-align: center;
 	text-shadow: 2px 2px black;
 	color: #F7FF3F;
+	font-family: Typoster;
 }
 
 .result-board > p {
 	text-align: center;
 	margin-top: 30px;
 	text-shadow: 2px 2px black;
-	font-family: sans-serif;
+	font-family: Typoster;
 	color: #F7FF3F;
-
+	font-size: 20px;
 }
 
 .bottom-space {
