@@ -4,17 +4,17 @@
 		<link rel="stylesheet" href="normalize.css">
 		<link rel="stylesheet" href="style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular.js"></script>
+		<script src="/Users/NamNguyen/Desktop/GATicTacToe/ngFx.js"></script>
 		<script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
-		<script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
-		<script src="ngFx.js"></script>
+		<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
 		<script src="main.js"></script>
 		<title>Pulp Fiction TTD</title>
 	</head>
 
 	<body ng-controller="gameCtrl">		
 		<main>
-			<div class="cover-photo">
-				<div class="cover-title-container">
+			<div id="cover-photo" class="fx-bounce-left" ng-show="showCover">
+				<div cover-title-container class="cover-title-container fx-bounce-down" ng-show="showCoverTitle">
 				<header class="cover-title">
 					<h1>Pulp Fiction Tic Tac Die!</h1>
 					<a href="#test"><button>PLAY!</button></a>
@@ -36,7 +36,7 @@
 		</div>
 </div>-->
 		<div id="test">
-		<header class="game-board-title">
+		<header ng-show="showGameBoard" class="game-board-title">
 			<h2>Royale With Cheese</h2>
 		</header>
 
@@ -44,18 +44,18 @@
 		
 		<section>
 			<ul>
-				<li class='fx-fade-down' ng-repeat="cell in box.cells track by $index" ng-class="{clear: $index % 3 == 0, format: true, vincent: box.cells[$index] == 'X', butch: box.cells[$index] == 'O', cover: box.cells[$index] != ('X' || 'O')}" ng-click="gamePlay($index)">
+				<li ng-show="showGameBoard" ng-repeat="cell in db.cells track by $index" ng-class="{clear: $index % 3 == 0, format: true, vincent: cell == 'X', butch: cell == 'O', cover: cell != ('X' || 'O')}" ng-click="gamePlay($index)">
 					{{ cell }}
 				</li>
 			</ul>
 		</section>
 		</div>
-		<div class="result-board">
+		<div ng-show="showGameBoard" class="result-board">
 			<h2>The winner is!</h2>
 			<p>{{ winner }}</p>
 			<p>{{ tie }}</p>
-		</div>
-		<div class="bottom-space">
+			</br>
+			<p>It is {{ characterTurn }} turn</p>
 		</div>
 		</div>
 		</main>

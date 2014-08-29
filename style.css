@@ -7,7 +7,7 @@ body {
 	background-color: #FF0051;
 }
 
-.cover-photo {
+#cover-photo {
 	height: 825px;
 	width: 1450px;
 	background-image: url('http://cdn.wallgig.net/2014/03/01/303bueus70_Pulp_Fiction_11.png');
