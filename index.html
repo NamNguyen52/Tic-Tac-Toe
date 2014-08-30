@@ -14,27 +14,14 @@
 	<body ng-controller="gameCtrl">		
 		<main>
 			<div id="cover-photo" class="fx-bounce-left" ng-show="showCover">
-				<div cover-title-container class="cover-title-container fx-bounce-down" ng-show="showCoverTitle">
+				<div class="cover-title-container fx-bounce-down" ng-show="showCoverTitle">
 				<header class="cover-title">
 					<h1>Pulp Fiction Tic Tac Die!</h1>
 					<a href="#test"><button>PLAY!</button></a>
 				</header>
 				</div>
 			</div>	
-<!--<div id="start">-->
 
-		<!--<div class="screen">
-
-			<h2 class="game-character">Pick your player</h2>
-
-			<div class="menu">
-				<a href="#test"><input type="button" ng-click="playerAsign(1)" value="Vincent Vega"></a>
-				<a href="#test"><input type="button" ng-click="playerAsign(2)" value="Butch Coolidge"></a>
-			</div>
-
-			</div>
-		</div>
-</div>-->
 		<div id="test">
 		<header ng-show="showGameBoard" class="game-board-title">
 			<h2>Royale With Cheese</h2>
@@ -49,14 +36,24 @@
 				</li>
 			</ul>
 		</section>
+
+		<div class="fx-bounce-down factoids" ng-show="factShow">
+			<h2>Factoid</h2>
+			<p>{{ factoidData }}</p>
 		</div>
+		
+		</div>
+
 		<div ng-show="showGameBoard" class="result-board">
 			<h2>The winner is!</h2>
 			<p>{{ winner }}</p>
 			<p>{{ tie }}</p>
-			</br>
+			<p>You are: </p>
+			<p>{{ player1 }}</p>
+			<p>{{ player2 }}</p>
 			<p>It is {{ characterTurn }} turn</p>
 		</div>
+
 		</div>
 		</main>
 	</body>

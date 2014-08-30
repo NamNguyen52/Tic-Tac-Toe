@@ -8,8 +8,9 @@ body {
 }
 
 #cover-photo {
-	height: 825px;
-	width: 1450px;
+	height: 100%;
+	width: 100%;
+	margin-bottom: 200px;
 	background-image: url('http://cdn.wallgig.net/2014/03/01/303bueus70_Pulp_Fiction_11.png');
 	background-size: cover;
 	background-position: center center;
@@ -25,18 +26,8 @@ body {
 
 .cover-title-container {
 	width: 600px;
-	height: 800px;
+	height: 890px;
 	margin-left: 50px;
-}
-
-.animate-enter {
-	-webkit-transition: 1s linear all;
-	transition: 1s linear all;
-	opacity: 0;
-}
-
-.animate-enter.animate-enter-active {
-	opacity: 1;
 }
 
 button {
@@ -46,23 +37,8 @@ button {
 	text-shadow: 2px 2px black;
 }
 
-.game-character {
-	font-family: sans-serif;
-	font-size: 30px;
-	text-align: center;
-}
-
-.menu {
-	width: 200px;
-	border: 2px solid black;
-	margin-right: auto;
-	margin-left: auto;
-	text-align: center;
-}
-
 header {
 	text-align: center;
-	margin-top: 50px;
 	margin-bottom: -150px;
 	font-size: 40px;
 	color: #F7FF3F;
@@ -78,10 +54,10 @@ header {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 150px;
+	position: relative;
 }
 
 .game-board-title {
-	margin-top: 150px;
 	font-family: Typoster;
 	font-size: 40px;
 	padding-bottom: 10px;
@@ -99,6 +75,30 @@ header {
 	margin-bottom: 15px;
 }
 
+.factoids {
+	width: 280px;
+	height: 300px;
+	position: absolute;
+	top: 30%;
+	right: -290px;
+}
+
+.factoids > h2 {
+	text-align: center;
+	font-family: Typoster;
+	text-shadow: 3px 3px black;
+	color: #F7FF3F;
+}
+
+.factoids > p {
+	font-family: sans-serif;
+	color: white;
+	font-size: 17px;
+	text-shadow: 1px 1px black;
+	padding: 5px;
+	line-height: 20px;
+}
+
 .result-board {
 	position: relative;
 	left: 50px;
@@ -106,6 +106,7 @@ header {
 	width: 280px;
 	font-size: 20px;
 	top: 100px;
+	display: inline-block;
 }
 
 .result-board > h2 {

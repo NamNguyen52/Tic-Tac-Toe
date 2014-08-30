@@ -8,7 +8,7 @@ $scope.showCover = false;
 
 $timeout(function(){
 	$scope.showCover = true;
-}, 500);
+}, 800);
 
 $scope.showGameBoard = false;
 
@@ -21,7 +21,7 @@ $timeout(function(){
 	$scope.showCoverTitle = true;
 }, 1000);
 
-$scope.playerAsign = function(buttonNum) {
+/*$scope.playerAsign = function(buttonNum) {
 
 	if (buttonNum == 1) {
 		$scope.player1 = "Vincent";
@@ -36,28 +36,25 @@ $scope.playerAsign = function(buttonNum) {
 	}
 	$scope.playerOrder.push($scope.player1);
 	$scope.playerOrder.push($scope.player2);
-}
+}*/
 
 $scope.playerOrder = [];
 
-var box = {cells: ['','','','','','','','','']};
-
-/*var ref = $firebase( new Firebase("https://pulpttt.firebaseio.com/data") );
-ref.$bind($scope,'box');
-
-$scope.$watch('box', function(){
-	console.log('Hello!');
-});*/
+var box = {	cells: ['','','','','','','','',''],
+			numberOfPlayers: 0,
+			gameInProg: true,
+			counter: 0
+};
 
 $scope.counter = 0
 $scope.characterTurn = "Butch's";
 
 $scope.gamePlay = function(value) {
 
-	$scope.counter = $scope.counter + 1;
-	console.log($scope.counter);
+	$scope.db.counter = $scope.db.counter + 1;
+	console.log($scope.db.counter);
 if ($scope.db.cells[value] == 0)	 
-	if ($scope.counter % 2 == 0) {
+	if ($scope.db.counter % 2 == 0) {
 		$scope.characterTurn = "Butch's";
 		console.log(value);
 		$scope.db.cells[value] = "X"
@@ -70,6 +67,7 @@ if ($scope.db.cells[value] == 0)
 	};
 	$scope.trigger($scope.db.cells);
 	$scope.winner($scope.db.cells);
+	$scope.pulpFacts();
 };
 
 $scope.tab = 0
@@ -129,14 +127,50 @@ $scope.winner = function(array2) {
 		return false;	
 	};
 };
+//FACTOIDS
+$scope.factCount = 0;
+$scope.factShow = false;
+$scope.pulpFacts = function() {
+	$scope.factShow = true;
+	var factArray = [
+	"Whenever Vincent Vega goes to the toilet (which is a lot - constipation is a side effect of heroin), something bad happens. He emerges at Mia Wallace's house to find her overdosing, comes out at the restaurant to find a robbery unfolding and is shot dead by Butch after using his bathroom.",
+	"When Bruce Willis escapes the pawn shop, he sees a neon sign that says Killians Red, but as some of the letters are missing it reads 'Kill ed'. Picking up Zed's keys, Butch looks at the 'Z' on the keyring, subliminally spelling out 'Kill Zed'. It's then that Butch goes back to save Marcellus.",
+	"The role of Vincent Vega was originally written for Michael Madsen, who played Vic Vega in Reservoir Dogs. Instead, Madsen opted to play Virgil Earp in Wyatt Earp. Tarantino then made the controversial choice of casting John Travolta, an actor best known for roles in Grease, Saturday Night Fever and Look Who's Talking. Travolta was paid less than $150,000, but went on to receive an Oscar nomination for Best Actor.",
+	"Quentin Tarantino hesitated over playing Jimmie or Lance. He eventually chose Jimmie as he wanted to be behind the camera during Mia's overdose scene.",
+	"The 'F word' is said 265 times during Pulp Fiction.",
+	"Jules was originally meant to have a massive afro, but a crew member purchased a 'jheri curl' wig instead. Luckily, both Jackson and Tarantino liked it, and it became part of the character.",
+	"The film's title is self-referential. 'Pulp' magazines were popular during the mid-20th century and famed for their graphic violence and punchy dialogue - exploited to attract a readership. The film's content mirrors these overt, unapologetic stylings.",
+	"Butch’s Honda Civic is exact same one used in both Jackie Brown and Kill Bill: Volume 2.",
+	"The shot of Marcellus stopping and seeing Butch in the middle of the road is copied directly from Psycho."
+	];
+	console.log(factArray[$scope.factCount]);
+	$scope.factoidData = factArray[$scope.factCount];
+	$scope.factCount += 1;
+};
 
+//FIREBASE
 
 var ref = $firebase(new Firebase('https://pulpttt.firebaseio.com/data'));
 
 var syncObject = ref.$asObject();
 
 syncObject.$bindTo($scope, "db").then(function() {
-$scope.db = box;
+	if (!$scope.db.gameInProg) {
+		$scope.db = box;
+	};
+
+	$scope.localPlayerCharacter = $scope.db.numberOfPlayers;
+
+	if ($scope.db.numberOfPlayers == 0) {
+		$scope.player1 = "Butch";
+		console.log($scope.player1);
+	};
+
+	if ($scope.db.numberOfPlayers == 1) {
+		$scope.player2 = "Vincent";
+		console.log($scope.player2);
+	};
+	$scope.db.numberOfPlayers += 1;
 });
 
 
