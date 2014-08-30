@@ -5,13 +5,11 @@ var pulpTTT = angular.module('pulpTTT', ['ngFx','firebase']);
 pulpTTT.controller('gameCtrl', ['$scope','$firebase','$timeout', function($scope, $firebase, $timeout){
 
 $scope.showCover = false;
-
 $timeout(function(){
 	$scope.showCover = true;
 }, 800);
 
 $scope.showGameBoard = false;
-
 $timeout(function(){
 	$scope.showGameBoard = true;
 }, 1000);
@@ -21,46 +19,50 @@ $timeout(function(){
 	$scope.showCoverTitle = true;
 }, 1000);
 
-/*$scope.playerAsign = function(buttonNum) {
-
-	if (buttonNum == 1) {
-		$scope.player1 = "Vincent";
-	} else {
-		$scope.player1 = "Butch";
-	}
-
-	if ($scope.player1 == "Vincent") {
-		$scope.player2 = "Butch";
-	} else {
-		$scope.player2 = "Vincent";
-	}
-	$scope.playerOrder.push($scope.player1);
-	$scope.playerOrder.push($scope.player2);
-}*/
-
-$scope.playerOrder = [];
-
 var box = {	cells: ['','','','','','','','',''],
 			numberOfPlayers: 0,
 			gameInProg: true,
-			counter: 0
+			counter: 0,
+			characterTurn: "Butch\’s",
+			factShow: false,
+			factCount: 0,
+			factoidData: "",
+			winnerTitle: false,
+			winner: "",
+			tie: "",
+			tabCounter: 0,
+			playAgainMenu: false
 };
 
 $scope.counter = 0
 $scope.characterTurn = "Butch's";
 
 $scope.gamePlay = function(value) {
+	if($scope.player1 == "Butch" && $scope.db.characterTurn == "Vincent's") {
+		alert("It's not your turn!");
+		return false;
+	};
+
+	if($scope.player2 == "Vincent" && $scope.characterTurn == "Butch's" && $scope.db.counter == 0) {
+		alert("It's not your turn!");
+		return false;
+	};
+
+	if($scope.player2 == "Vincent" && $scope.db.characterTurn == "Butch's") {
+		alert("It's not your turn!");
+		return false;
+	};
 
 	$scope.db.counter = $scope.db.counter + 1;
 	console.log($scope.db.counter);
 if ($scope.db.cells[value] == 0)	 
 	if ($scope.db.counter % 2 == 0) {
-		$scope.characterTurn = "Butch's";
+		$scope.db.characterTurn = "Butch's";
 		console.log(value);
 		$scope.db.cells[value] = "X"
 		console.log($scope.db.cells);
 	} else {
-		$scope.characterTurn = "Vincent's";
+		$scope.db.characterTurn = "Vincent's";
 		console.log(value);
 		$scope.db.cells[value] = "O"
 		console.log($scope.db.cells);
@@ -77,10 +79,12 @@ $scope.trigger = function(array) {
 
 	while ($scope.tab < array.length+1) {
 		if (array[$scope.tab] == "X" || "O") {
-			$scope.tabCounter+=1;
+			$scope.db.tabCounter+=1;
 			$scope.tab+=1;
-			if ($scope.tabCounter == 9) {
-				$scope.tie="It's a tie!";
+			if ($scope.db.tabCounter == 9) {
+				$scope.db.winnerTitle = true;
+				$scope.db.tie="It's a tie!";
+				$scope.playAgain();
 				return true
 			} else {
 				return false;
@@ -90,6 +94,8 @@ $scope.trigger = function(array) {
 		};
 	};
 };
+
+$scope.winnerTitle = false;
 
 $scope.winner = function(array2) {
 
@@ -105,8 +111,10 @@ $scope.winner = function(array2) {
 	     array2[2] == 'X' && array2[5] == 'X' && array2[8] == 'X'
 	 	
 		 ){
-		$scope.winner="Vincent!";
-		$scope.tabCounter = 0;
+		$scope.db.winnerTitle = true;
+		$scope.db.winner="Vincent!";
+		$scope.db.tabCounter = 0;
+		$scope.playAgain();
 		return true;
 	} else if (
 
@@ -120,18 +128,28 @@ $scope.winner = function(array2) {
 	     array2[2] == 'O' && array2[5] == 'O' && array2[8] == 'O'
 
 		) {
-		$scope.winner="Butch!";
-		$scope.tabCounter = 0;
+		$scope.db.winnerTitle = true;
+		$scope.db.winner="Butch!";
+		$scope.db.tabCounter = 0;
+		$scope.playAgain();
 		return true;
 	} else {
 		return false;	
 	};
 };
+
+$scope.playAgainMenu = false;
+$scope.playAgain = function(){
+	$timeout(function(){
+		$scope.db.playAgainMenu = true;
+	}, 1000);
+};
+
 //FACTOIDS
 $scope.factCount = 0;
 $scope.factShow = false;
 $scope.pulpFacts = function() {
-	$scope.factShow = true;
+	$scope.db.factShow = true;
 	var factArray = [
 	"Whenever Vincent Vega goes to the toilet (which is a lot - constipation is a side effect of heroin), something bad happens. He emerges at Mia Wallace's house to find her overdosing, comes out at the restaurant to find a robbery unfolding and is shot dead by Butch after using his bathroom.",
 	"When Bruce Willis escapes the pawn shop, he sees a neon sign that says Killians Red, but as some of the letters are missing it reads 'Kill ed'. Picking up Zed's keys, Butch looks at the 'Z' on the keyring, subliminally spelling out 'Kill Zed'. It's then that Butch goes back to save Marcellus.",
@@ -144,8 +162,8 @@ $scope.pulpFacts = function() {
 	"The shot of Marcellus stopping and seeing Butch in the middle of the road is copied directly from Psycho."
 	];
 	console.log(factArray[$scope.factCount]);
-	$scope.factoidData = factArray[$scope.factCount];
-	$scope.factCount += 1;
+	$scope.db.factoidData = factArray[$scope.db.factCount];
+	$scope.db.factCount += 1;
 };
 
 //FIREBASE
@@ -172,6 +190,15 @@ syncObject.$bindTo($scope, "db").then(function() {
 	};
 	$scope.db.numberOfPlayers += 1;
 });
+
+//GAME RESET
+$scope.gameResetYes = function() {
+    $scope.db.gameInProg = false;
+    syncObject.$save().then(function(){
+    	 syncObject.$destroy();
+    	 window.location.reload();
+    });
+};
 
 
 }]);

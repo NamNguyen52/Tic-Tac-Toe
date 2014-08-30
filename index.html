@@ -37,21 +37,27 @@
 			</ul>
 		</section>
 
-		<div class="fx-bounce-down factoids" ng-show="factShow">
+		<div class="fx-bounce-down factoids" ng-show="db.factShow">
 			<h2>Factoid</h2>
-			<p>{{ factoidData }}</p>
+			<p>{{ db.factoidData }}</p>
 		</div>
-		
+
+		<div class="play-again fx-bounce-down" ng-show="db.playAgainMenu">
+			<h2>Play again?</h2>
+			<button ng-click="gameResetYes()">YES</button>
+			<button ng-click="gameResetNo()">NO</button>
+		</div>
+
 		</div>
 
 		<div ng-show="showGameBoard" class="result-board">
-			<h2>The winner is!</h2>
-			<p>{{ winner }}</p>
-			<p>{{ tie }}</p>
+			<h2 ng-show="db.winnerTitle" class="fx-bounce-down">The winner is:</h2>
+			<p>{{ db.winner }}</p>
+			<p>{{ db.tie }}</p>
 			<p>You are: </p>
 			<p>{{ player1 }}</p>
 			<p>{{ player2 }}</p>
-			<p>It is {{ characterTurn }} turn</p>
+			<p>It is {{ db.characterTurn }} turn</p>
 		</div>
 
 		</div>

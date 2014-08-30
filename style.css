@@ -75,6 +75,28 @@ header {
 	margin-bottom: 15px;
 }
 
+.play-again {
+	width: 280px;
+	height: 200px;
+	position: absolute;
+	top: 280px;
+	right: -290px;
+	font-family: Typoster;
+}
+
+.play-again > h2 {
+	text-align: center;
+	font-family: Typoster;
+	text-shadow: 3px 3px black;
+	color: #F7FF3F;
+	font-size: 30px;
+}
+
+.play-again > button {
+	position: relative;
+	margin-left: 60px;
+}
+
 .factoids {
 	width: 280px;
 	height: 300px;
