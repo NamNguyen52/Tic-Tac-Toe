@@ -1,0 +1,9 @@
+{
+  "firebase": "pulpttt",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

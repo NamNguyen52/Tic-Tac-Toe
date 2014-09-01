@@ -121,6 +121,20 @@ header {
 	line-height: 20px;
 }
 
+.no-play-again {
+	width: 700px;
+	height: 700px;
+	position: absolute;
+	top: -100px;
+	right: -10px;
+	border: 1px solid black;
+	-webkit-box-shadow: 6px 11px 225px 105px rgba(0,0,0,0.75);
+	-moz-box-shadow: 6px 11px 225px 105px rgba(0,0,0,0.75);
+	box-shadow: 6px 11px 225px 105px rgba(0,0,0,0.75);
+	background-image: url('http://images4.fanpop.com/image/photos/21700000/-What-Does-Marsellus-Wallace-look-like-by-Oliver-Barrett-pulp-fiction-21731068-650-867.jpg');
+	background-size: cover;
+}
+
 .result-board {
 	position: relative;
 	left: 50px;

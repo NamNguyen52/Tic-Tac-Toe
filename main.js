@@ -4,6 +4,8 @@ var pulpTTT = angular.module('pulpTTT', ['ngFx','firebase']);
 
 pulpTTT.controller('gameCtrl', ['$scope','$firebase','$timeout', function($scope, $firebase, $timeout){
 
+//Timing functions for animations on main screen. 
+
 $scope.showCover = false;
 $timeout(function(){
 	$scope.showCover = true;
@@ -19,6 +21,8 @@ $timeout(function(){
 	$scope.showCoverTitle = true;
 }, 1000);
 
+
+//FIREBASE variables 
 var box = {	cells: ['','','','','','','','',''],
 			numberOfPlayers: 0,
 			gameInProg: true,
@@ -34,24 +38,27 @@ var box = {	cells: ['','','','','','','','',''],
 			playAgainMenu: false
 };
 
+//Main game engine. Dictates who goes next. Sends an alert message if 
+// not player's turn. 
+
 $scope.counter = 0
 $scope.characterTurn = "Butch's";
 
 $scope.gamePlay = function(value) {
-	if($scope.player1 == "Butch" && $scope.db.characterTurn == "Vincent's") {
-		alert("It's not your turn!");
-		return false;
-	};
+	// if($scope.player1 == "Butch" && $scope.db.characterTurn == "Vincent's") {
+	// 	alert("It's not your turn!");
+	// 	return false;
+	// };
 
-	if($scope.player2 == "Vincent" && $scope.characterTurn == "Butch's" && $scope.db.counter == 0) {
-		alert("It's not your turn!");
-		return false;
-	};
+	// if($scope.player2 == "Vincent" && $scope.characterTurn == "Butch's" && $scope.db.counter == 0) {
+	// 	alert("It's not your turn!");
+	// 	return false;
+	// };
 
-	if($scope.player2 == "Vincent" && $scope.db.characterTurn == "Butch's") {
-		alert("It's not your turn!");
-		return false;
-	};
+	// if($scope.player2 == "Vincent" && $scope.db.characterTurn == "Butch's") {
+	// 	alert("It's not your turn!");
+	// 	return false;
+	// };
 
 	$scope.db.counter = $scope.db.counter + 1;
 	console.log($scope.db.counter);
@@ -71,6 +78,8 @@ if ($scope.db.cells[value] == 0)
 	$scope.winner($scope.db.cells);
 	$scope.pulpFacts();
 };
+
+//Tie engine
 
 $scope.tab = 0
 $scope.tabCounter = 0
@@ -95,6 +104,8 @@ $scope.trigger = function(array) {
 	};
 };
 
+//Winning conditions and function
+
 $scope.winnerTitle = false;
 
 $scope.winner = function(array2) {
@@ -112,6 +123,8 @@ $scope.winner = function(array2) {
 	 	
 		 ){
 		$scope.db.winnerTitle = true;
+		$scope.showCover = false;
+		$scope.showCoverTitle = false;
 		$scope.db.winner="Vincent!";
 		$scope.db.tabCounter = 0;
 		$scope.playAgain();
@@ -129,6 +142,8 @@ $scope.winner = function(array2) {
 
 		) {
 		$scope.db.winnerTitle = true;
+		$scope.showCover = false;
+		$scope.showCoverTitle = false;
 		$scope.db.winner="Butch!";
 		$scope.db.tabCounter = 0;
 		$scope.playAgain();
@@ -137,6 +152,9 @@ $scope.winner = function(array2) {
 		return false;	
 	};
 };
+
+//Timer function the pops-up after 1 second when a winner or tie 
+// has been announced. Asks the player(s) if they want to play again.
 
 $scope.playAgainMenu = false;
 $scope.playAgain = function(){
@@ -188,17 +206,35 @@ syncObject.$bindTo($scope, "db").then(function() {
 		$scope.player2 = "Vincent";
 		console.log($scope.player2);
 	};
+
 	$scope.db.numberOfPlayers += 1;
+
 });
 
 //GAME RESET
 $scope.gameResetYes = function() {
     $scope.db.gameInProg = false;
+    window.history.back(-1);
     syncObject.$save().then(function(){
     	 syncObject.$destroy();
     	 window.location.reload();
     });
 };
 
+$scope.gameResetNo = function() {
+	$scope.db.gameInProg = false;
+	syncObject.$save().then(function(){
+    	 // syncObject.$destroy();
+    	 $scope.db = box;
+    	 $scope.noPicTimer();
+	}); 	 
+};
+
+$scope.noPlayPic = false;
+$scope.noPicTimer = function() {
+	$timeout(function(){
+		$scope.noPlayPic = true;
+	}, 500);
+};
 
 }]);
