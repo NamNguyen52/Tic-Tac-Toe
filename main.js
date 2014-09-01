@@ -45,20 +45,20 @@ $scope.counter = 0
 $scope.characterTurn = "Butch's";
 
 $scope.gamePlay = function(value) {
-	// if($scope.player1 == "Butch" && $scope.db.characterTurn == "Vincent's") {
-	// 	alert("It's not your turn!");
-	// 	return false;
-	// };
+	if($scope.player1 == "Butch" && $scope.db.characterTurn == "Vincent's") {
+		alert("It's not your turn!");
+		return false;
+	};
 
-	// if($scope.player2 == "Vincent" && $scope.characterTurn == "Butch's" && $scope.db.counter == 0) {
-	// 	alert("It's not your turn!");
-	// 	return false;
-	// };
+	if($scope.player2 == "Vincent" && $scope.characterTurn == "Butch's" && $scope.db.counter == 0) {
+		alert("It's not your turn!");
+		return false;
+	};
 
-	// if($scope.player2 == "Vincent" && $scope.db.characterTurn == "Butch's") {
-	// 	alert("It's not your turn!");
-	// 	return false;
-	// };
+	if($scope.player2 == "Vincent" && $scope.db.characterTurn == "Butch's") {
+		alert("It's not your turn!");
+		return false;
+	};
 
 	$scope.db.counter = $scope.db.counter + 1;
 	console.log($scope.db.counter);
